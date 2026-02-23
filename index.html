@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asterion — AI Konzultant</title>
+  <meta name="description" content="Automatizace workflowů a vývoj firemních aplikací na míru. Ušetřete čas a peníze s umělou inteligencí.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:          #07080C;
+      --bg-2:        #0C0D13;
+      --bg-3:        #101118;
+      --text:        #EDE8DC;
+      --text-muted:  #7A7566;
+      --text-dim:    #3A3830;
+      --gold:        #C4A052;
+      --gold-light:  #D4B472;
+      --gold-dim:    rgba(196,160,82,0.18);
+      --border:      rgba(196,160,82,0.14);
+      --border-s:    rgba(237,232,220,0.07);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ─── GRAIN OVERLAY ─── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 9000;
+    }
+
+    /* ─── CURSOR ─── */
+    .cursor {
+      position: fixed; width: 7px; height: 7px;
+      background: var(--gold); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: transform .1s;
+    }
+    .cursor-ring {
+      position: fixed; width: 30px; height: 30px;
+      border: 1px solid rgba(196,160,82,.35); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: all .18s ease;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 500;
+      padding: 1.6rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all .4s ease;
+    }
+    nav.scrolled {
+      background: rgba(7,8,12,.88);
+      backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 3rem;
+    }
+
+    .nav-logo { text-decoration: none; display: flex; flex-direction: column; gap: .12rem; }
+    .nav-logo-name {
+      font-family: 'Cormorant', serif; font-weight: 400;
+      font-size: 1.35rem; letter-spacing: .28em; color: var(--text);
+    }
+    .nav-logo-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .55rem; letter-spacing: .32em; color: var(--gold); text-transform: uppercase;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links a {
+      font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      transition: color .3s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: var(--gold);
+      transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      border: 1px solid var(--gold) !important;
+      padding: .45rem 1.15rem !important;
+      color: var(--gold) !important;
+      transition: all .3s !important;
+    }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--bg) !important; }
+    .nav-cta::after { display:none !important; }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 9rem 3rem 5rem; overflow: hidden;
+    }
+
+    #particles {
+      position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 4rem; align-items: center;
+    }
+
+    .hero-left { display: flex; flex-direction: column; gap: 2rem; }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: .75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem; letter-spacing: .22em; color: var(--gold); text-transform: uppercase;
+      animation: fadeUp .8s .1s both;
+    }
+    .hero-tag::before { content:''; width:24px; height:1px; background:var(--gold); }
+
+    h1.hero-title {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(3.6rem, 7.5vw, 6.8rem);
+      font-weight: 300; line-height: 1.04; letter-spacing: -.01em;
+      animation: fadeUp .8s .2s both;
+    }
+    h1.hero-title em { font-style: italic; color: var(--gold-light); }
+
+    .hero-desc {
+      font-size: .98rem; font-weight: 300;
+      color: var(--text-muted); line-height: 1.75; max-width: 430px;
+      animation: fadeUp .8s .35s both;
+    }
+
+    .hero-actions {
+      display: flex; align-items: center; gap: 2rem;
+      animation: fadeUp .8s .5s both;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .75rem;
+      background: var(--gold); color: var(--bg);
+      padding: .9rem 2rem;
+      font-size: .83rem; font-weight: 500; letter-spacing: .06em;
+      text-decoration: none; text-transform: uppercase;
+      transition: all .3s; position: relative; overflow: hidden;
+    }
+    .btn-primary::before {
+      content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+      background: rgba(255,255,255,.14); transition: left .3s;
+    }
+    .btn-primary:hover::before { left:0; }
+    .btn-primary svg { transition: transform .3s; }
+    .btn-primary:hover svg { transform: translateX(4px); }
+
+    .btn-link {
+      font-size: .83rem; color: var(--text-muted); text-decoration: none;
+      letter-spacing: .05em; transition: color .3s;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .btn-link:hover { color: var(--text); }
+
+    .hero-right { display: flex; justify-content: center; align-items: center; }
+
+    .hero-geo { width: 420px; height: 420px; }
+    .hero-geo svg { width:100%; height:100%; }
+
+    /* Orbit animations */
+    @keyframes spin-cw  { from{transform:rotate(0)}   to{transform:rotate(360deg)} }
+    @keyframes spin-ccw { from{transform:rotate(360deg)} to{transform:rotate(0)}   }
+    @keyframes glow     { 0%,100%{opacity:.45} 50%{opacity:1} }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes marquee  { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    .ring-cw  { transform-origin:210px 210px; animation:spin-cw  22s linear infinite; }
+    .ring-ccw { transform-origin:210px 210px; animation:spin-ccw 30s linear infinite; }
+    .orbit-dot-a { transform-origin:210px 210px; animation:spin-cw  14s linear infinite; }
+    .orbit-dot-b { transform-origin:210px 210px; animation:spin-ccw 20s linear infinite; }
+    .center-dot  { animation: glow 2.5s ease-in-out infinite; }
+
+    /* Hero scroll arrow */
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .6rem;
+      z-index: 2; animation: fadeUp .8s .8s both;
+    }
+    .hero-scroll span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem; letter-spacing: .28em; color: var(--text-dim); text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: glow 2s infinite;
+    }
+
+    /* ─── MARQUEE ─── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border-s);
+      border-bottom: 1px solid var(--border-s);
+      background: var(--bg-2); padding: .9rem 0;
+    }
+    .marquee-track {
+      display: flex; gap: 3.5rem; width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .m-item {
+      display: flex; align-items: center; gap: 1.2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--text-dim); white-space: nowrap;
+    }
+    .m-dot { width:4px; height:4px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+
+    /* ─── SECTION COMMONS ─── */
+    section { padding: 6rem 3rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .section-eyebrow {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 3.5rem;
+    }
+    .ey-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem; letter-spacing: .22em; color: var(--gold);
+    }
+    .ey-line { width:36px; height:1px; background:var(--border); }
+    .ey-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem; letter-spacing: .22em; color: var(--text-muted); text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 300; line-height: 1.1;
+    }
+    .section-title em { font-style:italic; color:var(--gold-light); }
+
+    /* ─── SERVICES ─── */
+    #services { background: var(--bg-2); }
+
+    .services-grid {
+      margin-top: 4rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    }
+
+    .srv-card {
+      padding: 3rem 2.8rem;
+      background: var(--bg-3);
+      border: 1px solid var(--border-s);
+      position: relative; overflow: hidden;
+      transition: border-color .4s;
+    }
+    .srv-card::before {
+      content:''; position:absolute; inset:0 auto 0 0;
+      width:2px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      transform: scaleY(0); transform-origin: top;
+      transition: transform .45s ease;
+    }
+    .srv-card:hover { border-color: var(--border); }
+    .srv-card:hover::before { transform: scaleY(1); }
+
+    .srv-num {
+      font-family: 'Cormorant', serif;
+      font-size: 4.5rem; font-weight: 300;
+      color: var(--text-dim); line-height: 1;
+      display: block; margin-bottom: 1.5rem;
+      transition: color .4s;
+    }
+    .srv-card:hover .srv-num { color: var(--gold-dim); }
+
+    .srv-title {
+      font-family: 'Cormorant', serif;
+      font-size: 1.9rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.15;
+    }
+
+    .srv-desc {
+      font-size: .9rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2rem;
+    }
+
+    .srv-features { list-style:none; display:flex; flex-direction:column; gap:.55rem; }
+    .srv-features li {
+      display: flex; align-items: center; gap:.75rem;
+      font-size: .84rem; color: var(--text-muted);
+    }
+    .srv-features li::before { content:''; width:16px; height:1px; background:var(--gold); flex-shrink:0; }
+
+    /* ─── TOOLS ─── */
+    #tools { background: var(--bg); }
+
+    .tools-head {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 4rem; align-items: end;
+    }
+    .tools-sub { font-size:.94rem; color:var(--text-muted); line-height:1.75; }
+
+    .tools-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--border-s);
+    }
+
+    .tool-card {
+      background: var(--bg); padding: 2.6rem;
+      position: relative; overflow: hidden;
+    }
+    .tool-card::after {
+      content:''; position:absolute; bottom:0; left:2.6rem; right:2.6rem;
+      height:1px;
+      background: linear-gradient(to right, var(--gold), transparent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .5s;
+    }
+    .tool-card:hover::after { transform: scaleX(1); }
+
+    .tool-icon {
+      width:46px; height:46px;
+      border: 1px solid var(--border-s);
+      display: flex; align-items:center; justify-content:center;
+      margin-bottom: 1.5rem;
+      transition: border-color .3s;
+    }
+    .tool-card:hover .tool-icon { border-color: var(--gold); }
+    .tool-icon svg { width:22px; height:22px; color:var(--gold); }
+
+    .tool-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem; letter-spacing: .1em; color:var(--gold); margin-bottom:.45rem;
+    }
+    .tool-title {
+      font-family: 'Cormorant', serif;
+      font-size: 1.55rem; font-weight:400; margin-bottom:1rem;
+    }
+    .tool-desc { font-size:.85rem; color:var(--text-muted); line-height:1.65; }
+
+    /* ─── PROCESS ─── */
+    #process { background: var(--bg-2); }
+
+    .process-steps {
+      margin-top: 4.5rem;
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content:''; position:absolute; top:23px; left:5%; right:5%;
+      height:1px;
+      background: linear-gradient(to right, transparent, var(--border), var(--border), var(--border), transparent);
+      pointer-events:none;
+    }
+
+    .p-step { padding: 0 2rem; }
+
+    .step-num {
+      width:46px; height:46px;
+      border: 1px solid var(--border-s);
+      background: var(--bg-2);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'JetBrains Mono',monospace;
+      font-size:.68rem; letter-spacing:.12em; color:var(--gold);
+      margin-bottom:2rem; position:relative; z-index:1;
+      transition: all .35s;
+    }
+    .p-step:hover .step-num {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+      box-shadow: 0 0 20px rgba(196,160,82,.12);
+    }
+
+    .step-title {
+      font-family:'Cormorant',serif;
+      font-size:1.4rem; font-weight:400; margin-bottom:.75rem;
+    }
+    .step-desc { font-size:.85rem; color:var(--text-muted); line-height:1.65; }
+
+    /* ─── CTA ─── */
+    #contact {
+      background: var(--bg);
+      text-align: center; padding: 9rem 3rem;
+    }
+    .cta-inner { max-width: 680px; margin:0 auto; }
+
+    .cta-tag {
+      display:block; margin-bottom:2rem;
+      font-family:'JetBrains Mono',monospace;
+      font-size:.62rem; letter-spacing:.32em; color:var(--gold); text-transform:uppercase;
+    }
+    .cta-title {
+      font-family:'Cormorant',serif;
+      font-size:clamp(2.8rem,6.5vw,5.2rem);
+      font-weight:300; line-height:1.08; margin-bottom:1.5rem;
+    }
+    .cta-title em { font-style:italic; color:var(--gold-light); }
+
+    .cta-desc { font-size:.95rem; color:var(--text-muted); line-height:1.75; margin-bottom:3rem; }
+
+    .cta-actions {
+      display:flex; align-items:center; justify-content:center; gap:2rem; flex-wrap:wrap;
+    }
+
+    .cta-email {
+      font-family:'JetBrains Mono',monospace; font-size:.85rem;
+      color:var(--text-muted); text-decoration:none; letter-spacing:.05em;
+      display:flex; align-items:center; gap:.75rem; transition:color .3s;
+    }
+    .cta-email::before { content:'→'; color:var(--gold); }
+    .cta-email:hover { color:var(--text); }
+
+    /* Divider line */
+    .hr-gold {
+      border:none; height:1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 5rem auto; max-width:800px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border-s);
+      padding: 2rem 3rem;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .f-logo {
+      font-family:'Cormorant',serif;
+      font-size:1rem; letter-spacing:.22em; color:var(--text-muted);
+    }
+    .f-copy {
+      font-family:'JetBrains Mono',monospace;
+      font-size:.58rem; letter-spacing:.16em; color:var(--text-dim);
+    }
+    .f-links { display:flex; gap:1.5rem; }
+    .f-links a {
+      font-size:.75rem; color:var(--text-dim); text-decoration:none; transition:color .3s;
+    }
+    .f-links a:hover { color:var(--gold); }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity:0; transform:translateY(22px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.vis { opacity:1; transform:translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width:960px) {
+      nav, nav.scrolled { padding: 1.2rem 1.5rem; }
+      #hero { padding: 8rem 1.5rem 4rem; }
+      .hero-content { grid-template-columns:1fr; gap:2rem; }
+      .hero-right { display:none; }
+      section { padding: 4rem 1.5rem; }
+      .services-grid { grid-template-columns:1fr; }
+      .tools-head { grid-template-columns:1fr; gap:2rem; }
+      .tools-grid { grid-template-columns:1fr; }
+      .process-steps { grid-template-columns:1fr 1fr; gap:3rem; }
+      .process-steps::before { display:none; }
+      footer { flex-direction:column; gap:1rem; text-align:center; }
+    }
+    @media (max-width:560px) {
+      .nav-links { display:none; }
+      .process-steps { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor"     id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ═══ NAV ═══ -->
+  <nav id="mainNav">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-name">ASTERION</span>
+      <span class="nav-logo-sub">AI · Konzultant</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Služby</a></li>
+      <li><a href="#tools">Nástroje</a></li>
+      <li><a href="#process">Proces</a></li>
+      <li><a href="#contact" class="nav-cta">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section id="hero">
+    <canvas id="particles"></canvas>
+
+    <div class="hero-content">
+      <div class="hero-left">
+        <span class="hero-tag">AI Konzultant &amp; Vývojář</span>
+
+        <h1 class="hero-title" style="animation-delay:.2s">
+          Nechte stroje<br>
+          <em>pracovat.</em><br>
+          Vy rostete.
+        </h1>
+
+        <p class="hero-desc" style="animation-delay:.35s">
+          Automatizuji firemní procesy a vyvíjím aplikace na míru
+          s nejmodernějšími AI nástroji. Ušetřím vám čas,
+          peníze — a nervy.
+        </p>
+
+        <div class="hero-actions" style="animation-delay:.5s">
+          <a href="#contact" class="btn-primary">
+            Začít spolupráci
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+          <a href="#services" class="btn-link">Prohlédnout služby</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-geo">
+          <svg viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background rings -->
+            <circle cx="210" cy="210" r="192" stroke="rgba(196,160,82,.07)"  stroke-width="1"/>
+            <circle cx="210" cy="210" r="150" stroke="rgba(196,160,82,.05)"  stroke-width="1"/>
+            <!-- Animated dashed rings -->
+            <circle cx="210" cy="210" r="135" stroke="rgba(196,160,82,.18)" stroke-width="1"
+              stroke-dasharray="3 9" class="ring-cw"/>
+            <circle cx="210" cy="210" r="88"  stroke="rgba(196,160,82,.12)" stroke-width="1"
+              stroke-dasharray="2 7" class="ring-ccw"/>
+            <!-- Cross hairs -->
+            <line x1="210" y1="18" x2="210" y2="402" stroke="rgba(196,160,82,.05)" stroke-width="1"/>
+            <line x1="18"  y1="210" x2="402" y2="210" stroke="rgba(196,160,82,.05)" stroke-width="1"/>
+            <!-- Diagonals -->
+            <line x1="80"  y1="80"  x2="340" y2="340" stroke="rgba(196,160,82,.04)" stroke-width="1"/>
+            <line x1="340" y1="80"  x2="80"  y2="340" stroke="rgba(196,160,82,.04)" stroke-width="1"/>
+            <!-- Constellation points -->
+            <circle cx="285" cy="125" r="2"   fill="rgba(196,160,82,.7)"/>
+            <circle cx="145" cy="295" r="1.5" fill="rgba(196,160,82,.5)"/>
+            <circle cx="315" cy="295" r="1.5" fill="rgba(196,160,82,.55)"/>
+            <circle cx="125" cy="145" r="2"   fill="rgba(196,160,82,.65)"/>
+            <circle cx="320" cy="175" r="1.5" fill="rgba(196,160,82,.4)"/>
+            <!-- Constellation lines -->
+            <line x1="210" y1="210" x2="285" y2="125" stroke="rgba(196,160,82,.14)" stroke-width="1"/>
+            <line x1="210" y1="210" x2="145" y2="295" stroke="rgba(196,160,82,.14)" stroke-width="1"/>
+            <line x1="210" y1="210" x2="315" y2="295" stroke="rgba(196,160,82,.1)"  stroke-width="1"/>
+            <line x1="210" y1="210" x2="125" y2="145" stroke="rgba(196,160,82,.12)" stroke-width="1"/>
+            <line x1="285" y1="125" x2="315" y2="295" stroke="rgba(196,160,82,.06)" stroke-width="1"/>
+            <line x1="125" y1="145" x2="145" y2="295" stroke="rgba(196,160,82,.06)" stroke-width="1"/>
+            <line x1="285" y1="125" x2="320" y2="175" stroke="rgba(196,160,82,.07)" stroke-width="1"/>
+            <!-- Orbiting dots -->
+            <circle cx="210" cy="75" r="3.5" fill="rgba(196,160,82,.85)" class="orbit-dot-a"/>
+            <circle cx="350" cy="210" r="2.5" fill="rgba(196,160,82,.55)" class="orbit-dot-b"/>
+            <!-- Center -->
+            <circle cx="210" cy="210" r="5"   fill="rgba(196,160,82,.65)" class="center-dot"/>
+            <circle cx="210" cy="210" r="1.5" fill="rgba(196,160,82,1)"/>
+            <!-- Corner brackets -->
+            <path d="M22 46 L22 22 L46 22" stroke="rgba(196,160,82,.28)" stroke-width="1" fill="none"/>
+            <path d="M398 46 L398 22 L374 22" stroke="rgba(196,160,82,.28)" stroke-width="1" fill="none"/>
+            <path d="M22 374 L22 398 L46 398" stroke="rgba(196,160,82,.28)" stroke-width="1" fill="none"/>
+            <path d="M398 374 L398 398 L374 398" stroke="rgba(196,160,82,.28)" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="m-item"><span class="m-dot"></span>Automatizace workflowů</div>
+      <div class="m-item"><span class="m-dot"></span>Claude Code</div>
+      <div class="m-item"><span class="m-dot"></span>Firemní aplikace na míru</div>
+      <div class="m-item"><span class="m-dot"></span>Make.com</div>
+      <div class="m-item"><span class="m-dot"></span>OpenAI Codex</div>
+      <div class="m-item"><span class="m-dot"></span>Integrace API</div>
+      <div class="m-item"><span class="m-dot"></span>AI agenti</div>
+      <div class="m-item"><span class="m-dot"></span>Úspora času &amp; nákladů</div>
+      <!-- duplicate -->
+      <div class="m-item"><span class="m-dot"></span>Automatizace workflowů</div>
+      <div class="m-item"><span class="m-dot"></span>Claude Code</div>
+      <div class="m-item"><span class="m-dot"></span>Firemní aplikace na míru</div>
+      <div class="m-item"><span class="m-dot"></span>Make.com</div>
+      <div class="m-item"><span class="m-dot"></span>OpenAI Codex</div>
+      <div class="m-item"><span class="m-dot"></span>Integrace API</div>
+      <div class="m-item"><span class="m-dot"></span>AI agenti</div>
+      <div class="m-item"><span class="m-dot"></span>Úspora času &amp; nákladů</div>
+    </div>
+  </div>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="section-eyebrow reveal">
+        <span class="ey-num">01</span>
+        <span class="ey-line"></span>
+        <span class="ey-text">Služby</span>
+      </div>
+      <h2 class="section-title reveal">Co pro vás <em>udělám</em></h2>
+
+      <div class="services-grid">
+        <div class="srv-card reveal">
+          <span class="srv-num">01</span>
+          <h3 class="srv-title">Automatizace Workflowů</h3>
+          <p class="srv-desc">
+            Odstraním repetitivní ruční práci z vašich procesů.
+            Propojím vaše nástroje a data tak, aby systémy
+            pracovaly za vás — 24 hodin denně, 7 dní v týdnu.
+          </p>
+          <ul class="srv-features">
+            <li>Propojení firemních nástrojů (CRM, ERP, e-mail)</li>
+            <li>Automatické reporty a notifikace</li>
+            <li>Zpracování formulářů a dat v reálném čase</li>
+            <li>Integrace AI agentů do existujících procesů</li>
+            <li>Monitoring, alerting a error handling</li>
+          </ul>
+        </div>
+
+        <div class="srv-card reveal" style="transition-delay:.12s">
+          <span class="srv-num">02</span>
+          <h3 class="srv-title">Firemní Aplikace</h3>
+          <p class="srv-desc">
+            Vyvíjím interní nástroje a aplikace přesně
+            podle vašich potřeb. Žádné kompromisy —
+            jen software, který funguje pro váš tým.
+          </p>
+          <ul class="srv-features">
+            <li>Interní dashboardy a admin systémy</li>
+            <li>CRM a projektové nástroje na míru</li>
+            <li>Datové portály a reportingové aplikace</li>
+            <li>AI-powered business nástroje</li>
+            <li>Integrace s existujícími systémy a API</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TOOLS ═══ -->
+  <section id="tools">
+    <div class="section-inner">
+      <div class="tools-head">
+        <div>
+          <div class="section-eyebrow reveal">
+            <span class="ey-num">02</span>
+            <span class="ey-line"></span>
+            <span class="ey-text">Nástroje</span>
+          </div>
+          <h2 class="section-title reveal">Technologie,<br>které <em>fungují</em></h2>
+        </div>
+        <p class="tools-sub reveal">
+          Používám pouze prověřené, špičkové AI nástroje.
+          Kombinací těchto platforem dosáhnu výsledků,
+          které by týmu vývojářů trvaly měsíce.
+        </p>
+      </div>
+
+      <div class="tools-grid">
+        <div class="tool-card reveal">
+          <div class="tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <path d="M8 9l3 3-3 3M13 15h3"/>
+            </svg>
+          </div>
+          <div class="tool-name">claude_code</div>
+          <h3 class="tool-title">Claude Code</h3>
+          <p class="tool-desc">
+            Anthropic's AI pro autonomní programování.
+            Analyzuje, píše a refaktoruje kód s hlubokým
+            pochopením celého projektu. Vývoj 10× rychleji.
+          </p>
+        </div>
+
+        <div class="tool-card reveal" style="transition-delay:.1s">
+          <div class="tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+              <polyline points="2 17 12 22 22 17"/>
+              <polyline points="2 12 12 17 22 12"/>
+            </svg>
+          </div>
+          <div class="tool-name">openai_codex</div>
+          <h3 class="tool-title">OpenAI Codex</h3>
+          <p class="tool-desc">
+            Generování, analýza a optimalizace kódu
+            nejpokročilejšími jazykovými modely. Ideální
+            pro komplexní algoritmické výzvy a refactoring.
+          </p>
+        </div>
+
+        <div class="tool-card reveal" style="transition-delay:.2s">
+          <div class="tool-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <div class="tool-name">make.com</div>
+          <h3 class="tool-title">Make.com</h3>
+          <p class="tool-desc">
+            Vizuální platforma pro automatizaci propojující
+            přes 1 500 aplikací. Výkonné workflow bez kódu
+            — nebo s kódem, dle složitosti úkolu.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROCESS ═══ -->
+  <section id="process">
+    <div class="section-inner">
+      <div class="section-eyebrow reveal">
+        <span class="ey-num">03</span>
+        <span class="ey-line"></span>
+        <span class="ey-text">Jak pracujeme</span>
+      </div>
+      <h2 class="section-title reveal">Čtyři kroky<br>ke <em>změně</em></h2>
+
+      <div class="process-steps">
+        <div class="p-step reveal">
+          <div class="step-num">01</div>
+          <h3 class="step-title">Analýza</h3>
+          <p class="step-desc">
+            Zmapujeme vaše aktuální procesy, identifikujeme
+            bottlenecky a příležitosti pro automatizaci.
+          </p>
+        </div>
+
+        <div class="p-step reveal" style="transition-delay:.1s">
+          <div class="step-num">02</div>
+          <h3 class="step-title">Návrh</h3>
+          <p class="step-desc">
+            Navrhneme konkrétní řešení s odhadem úspor
+            času a ROI. Bez zbytečného technického žargonu.
+          </p>
+        </div>
+
+        <div class="p-step reveal" style="transition-delay:.2s">
+          <div class="step-num">03</div>
+          <h3 class="step-title">Realizace</h3>
+          <p class="step-desc">
+            Implementace s průběžnými aktualizacemi.
+            Vy sledujete postup, my dodáváme výsledky.
+          </p>
+        </div>
+
+        <div class="p-step reveal" style="transition-delay:.3s">
+          <div class="step-num">04</div>
+          <h3 class="step-title">Podpora</h3>
+          <p class="step-desc">
+            Průběžná optimalizace, monitoring a podpora.
+            Systémy, které fungují spolehlivě dlouhodobě.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA / CONTACT ═══ -->
+  <section id="contact">
+    <div class="cta-inner">
+      <span class="cta-tag reveal">Začněme spolupráci</span>
+      <h2 class="cta-title reveal">
+        Ušetřeme váš<br>
+        <em>nejcennější</em><br>
+        zdroj — čas.
+      </h2>
+      <p class="cta-desc reveal">
+        Nezávazná konzultace zdarma. Napište nám —
+        do 24 hodin se ozveme s konkrétními návrhy
+        šitými přesně pro vaši firmu.
+      </p>
+      <div class="cta-actions reveal">
+        <a href="mailto:info@asterionsoft.cz" class="btn-primary" style="padding:1rem 2.5rem; font-size:.9rem;">
+          Napsat zprávu
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+        <a href="mailto:info@asterionsoft.cz" class="cta-email">info@asterionsoft.cz</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <span class="f-logo">ASTERION</span>
+    <span class="f-copy">© 2026 Asterionsoft.cz — Všechna práva vyhrazena</span>
+    <div class="f-links">
+      <a href="#">Ochrana dat</a>
+      <a href="#">Podmínky</a>
+    </div>
+  </footer>
+
+  <script>
+    /* ── CURSOR ── */
+    const cursor     = document.getElementById('cursor');
+    const cursorRing = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
+    });
+
+    (function tickRing() {
+      rx += (mx - rx) * .13;
+      ry += (my - ry) * .13;
+      cursorRing.style.left = rx + 'px';
+      cursorRing.style.top  = ry + 'px';
+      requestAnimationFrame(tickRing);
+    })();
+
+    document.querySelectorAll('a, button, .srv-card, .tool-card, .p-step').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursorRing.style.transform = 'translate(-50%,-50%) scale(1.9)';
+        cursorRing.style.borderColor = 'rgba(196,160,82,.55)';
+        cursor.style.transform = 'translate(-50%,-50%) scale(.5)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursorRing.style.transform = 'translate(-50%,-50%) scale(1)';
+        cursorRing.style.borderColor = 'rgba(196,160,82,.35)';
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      });
+    });
+
+    /* ── NAV SCROLL ── */
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    /* ── PARTICLES ── */
+    const canvas = document.getElementById('particles');
+    const ctx    = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    class Particle {
+      constructor() { this.init(); }
+      init() {
+        this.x  = Math.random() * canvas.width;
+        this.y  = Math.random() * canvas.height;
+        this.vx = (Math.random() - .5) * .28;
+        this.vy = (Math.random() - .5) * .28;
+        this.r  = Math.random() * 1.4 + .4;
+        this.a  = Math.random() * .55 + .15;
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width ||
+            this.y < 0 || this.y > canvas.height) this.init();
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(196,160,82,${this.a})`;
+        ctx.fill();
+      }
+    }
+
+    const pts = Array.from({ length: 55 }, () => new Particle());
+
+    function drawLines() {
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const dx = pts[i].x - pts[j].x;
+          const dy = pts[i].y - pts[j].y;
+          const d  = Math.sqrt(dx*dx + dy*dy);
+          if (d < 115) {
+            ctx.beginPath();
+            ctx.moveTo(pts[i].x, pts[i].y);
+            ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.strokeStyle = `rgba(196,160,82,${(1 - d/115) * .14})`;
+            ctx.lineWidth = .5;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    (function tick() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pts.forEach(p => { p.update(); p.draw(); });
+      drawLines();
+      requestAnimationFrame(tick);
+    })();
+
+    /* ── SCROLL REVEAL ── */
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+    }, { threshold: .14 });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

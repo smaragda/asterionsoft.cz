@@ -1,0 +1,17 @@
+# Playwright MCP
+.playwright-mcp/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary / scratch files
+*.tmp
+*~
