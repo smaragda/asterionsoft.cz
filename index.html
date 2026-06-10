@@ -3,27 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Asterion Software — AI automatizace a vývoj na míru</title>
-  <meta name="description" content="Asterion Software, s.r.o. — automatizace firemních procesů a vývoj aplikací na míru s využitím nejmodernějších AI nástrojů.">
+  <title>Asterion Software — tvůrci Studijo, AI content studia</title>
+  <meta name="description" content="Asterion Software, s.r.o. je česká firma stojící za aplikací Studijo — AI content studiem, kde z jednoho zadání vzniká text, grafika, voiceover, video, překlady i kurzy.">
 
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Asterion Software — tvůrci Studijo">
+  <meta property="og:description" content="Home of Studijo. AI content studio, kde z jednoho zadání vzniká text, grafika, voiceover, video, překlady i kurzy.">
+  <meta property="og:url" content="https://www.asterionsoft.cz/">
+  <meta property="og:locale" content="cs_CZ">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Asterion Software — tvůrci Studijo">
+  <meta name="twitter:description" content="Home of Studijo. AI content studio, kde z jednoho zadání vzniká text, grafika, voiceover, video, překlady i kurzy.">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%233b82f6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='45' font-family='Arial, sans-serif' font-size='38' font-weight='800' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.asterionsoft.cz/#org",
+        "name": "Asterion Software, s.r.o.",
+        "url": "https://www.asterionsoft.cz/",
+        "telephone": "+420604257866",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Bělehradská 858/23",
+          "postalCode": "120 00",
+          "addressLocality": "Praha 2",
+          "addressCountry": "CZ"
+        },
+        "sameAs": ["https://studijo.io"]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Studijo",
+        "url": "https://studijo.io",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Web",
+        "creator": { "@id": "https://www.asterionsoft.cz/#org" },
+        "offers": {
+          "@type": "Offer",
+          "price": "590",
+          "priceCurrency": "CZK"
+        }
+      }
+    ]
+  }
+  </script>
 
   <style>
     :root {
-      --bg:          #07080C;
-      --bg-2:        #0C0D13;
-      --bg-3:        #101118;
-      --text:        #EDE8DC;
-      --text-muted:  #7A7566;
-      --text-dim:    #3A3830;
-      --gold:        #C4A052;
-      --gold-light:  #D4B472;
-      --gold-dim:    rgba(196,160,82,0.18);
-      --border:      rgba(196,160,82,0.14);
-      --border-s:    rgba(237,232,220,0.07);
+      --purple:   #7c3aed;
+      --purple-l: #9d5bf7;
+      --purple-d: #5b21b6;
+      --blue:     #3b82f6;
+      --blue-l:   #60a5fa;
+      --amber:    #f59e0b;
+      --amber-l:  #fcd34d;
+      --bg:       #0a0b14;
+      --bg-2:     #0f1020;
+      --bg-3:     #13152a;
+      --surface:  rgba(255,255,255,0.04);
+      --surface-h:rgba(255,255,255,0.07);
+      --border:   rgba(255,255,255,0.08);
+      --border-h: rgba(255,255,255,0.15);
+      --text:     #f1f0ff;
+      --text-2:   #a8a3c7;
+      --text-3:   #6b6589;
+      --green:    #22c55e;
+      --radius:    16px;
+      --radius-lg: 24px;
+      --glow-p:   0 0 60px rgba(124,58,237,0.35);
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -33,882 +89,687 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      font-weight: 300;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
       line-height: 1.6;
       overflow-x: hidden;
-      cursor: none;
     }
 
-    /* ─── GRAIN OVERLAY ─── */
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.028;
-      pointer-events: none;
-      z-index: 9000;
+    h1, h2, h3, h4 {
+      font-family: 'Outfit', sans-serif;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); font-weight: 900; }
+    h2 { font-size: clamp(1.9rem, 4vw, 3rem);   font-weight: 800; }
+    h3 { font-size: clamp(1.05rem, 2vw, 1.3rem); font-weight: 700; }
+
+    /* ─── BACKGROUND FX ─── */
+    .grid-bg {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); opacity: 0.18;
+      animation: floatOrb 14s ease-in-out infinite;
+    }
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--purple) 0%, transparent 70%);
+      top: -150px; left: -100px;
+    }
+    .orb-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--blue) 0%, transparent 70%);
+      top: 10%; right: -100px;
+      animation-delay: -4s; animation-duration: 16s;
+    }
+    .orb-3 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--amber) 0%, transparent 70%);
+      bottom: 15%; left: 30%;
+      animation-delay: -8s; animation-duration: 18s;
+    }
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(40px,-40px) scale(1.05); }
+      66%      { transform: translate(-30px,30px) scale(0.96); }
     }
 
-    /* ─── CURSOR ─── */
-    .cursor {
-      position: fixed; width: 7px; height: 7px;
-      background: var(--gold); border-radius: 50%;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%,-50%);
-      transition: transform .1s;
-    }
-    .cursor-ring {
-      position: fixed; width: 30px; height: 30px;
-      border: 1px solid rgba(196,160,82,.35); border-radius: 50%;
-      pointer-events: none; z-index: 9998;
-      transform: translate(-50%,-50%);
-      transition: all .18s ease;
+    .wrap {
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+      position: relative; z-index: 1;
     }
 
-    /* ─── NAV ─── */
-    nav {
-      position: fixed; inset: 0 0 auto 0; z-index: 500;
-      padding: 1.6rem 3rem;
+    .grad-text {
+      background: linear-gradient(135deg, var(--purple-l) 0%, var(--blue-l) 50%, var(--amber-l) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn, .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: transform .2s ease, box-shadow .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .btn {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(124,58,237,0.4);
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124,58,237,0.55); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-2);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--border-h); color: var(--text); transform: translateY(-2px); }
+    .btn-sm { padding: 10px 22px; font-size: 0.875rem; }
+    .btn svg { flex-shrink: 0; }
+
+    /* ─── HEADER ─── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      transition: background .3s ease, box-shadow .3s ease;
+    }
+    header.scrolled {
+      background: rgba(10,11,20,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav {
       display: flex; align-items: center; justify-content: space-between;
-      transition: all .4s ease;
+      gap: 24px; padding: 20px 0;
     }
-    nav.scrolled {
-      background: rgba(7,8,12,.88);
-      backdrop-filter: blur(22px);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 3rem;
+    .logo {
+      display: inline-flex; flex-direction: column; gap: 2px;
+      text-decoration: none; color: var(--text);
     }
-
-    .nav-logo { text-decoration: none; display: flex; flex-direction: column; gap: .12rem; }
-    .nav-logo-name {
-      font-family: 'Cormorant', serif; font-weight: 400;
-      font-size: 1.35rem; letter-spacing: .28em; color: var(--text);
+    .logo-name {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800; font-size: 1.15rem; letter-spacing: 0.04em;
     }
-    .nav-logo-sub {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .55rem; letter-spacing: .32em; color: var(--gold); text-transform: uppercase;
+    .logo-sub {
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text-3);
     }
-
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-    .nav-links a {
-      font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--text-muted); text-decoration: none;
-      transition: color .3s; position: relative;
+    .logo-sub em { font-style: normal; color: var(--purple-l); }
+    .nav-links {
+      display: flex; align-items: center; gap: 28px;
+      list-style: none;
     }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -2px; left: 0;
-      width: 0; height: 1px; background: var(--gold);
-      transition: width .3s;
+    .nav-links a:not(.btn) {
+      text-decoration: none; color: var(--text-2);
+      font-size: 0.9rem; font-weight: 500;
+      transition: color .2s;
     }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-cta {
-      border: 1px solid var(--gold) !important;
-      padding: .45rem 1.15rem !important;
-      color: var(--gold) !important;
-      transition: all .3s !important;
-    }
-    .nav-cta:hover { background: var(--gold) !important; color: var(--bg) !important; }
-    .nav-cta::after { display:none !important; }
+    .nav-links a:not(.btn):hover { color: var(--text); }
 
     /* ─── HERO ─── */
-    #hero {
-      position: relative; min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 9rem 3rem 5rem; overflow: hidden;
-    }
-
-    #particles {
-      position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55;
-    }
-
-    .hero-content {
-      position: relative; z-index: 2;
-      max-width: 1200px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1.1fr .9fr; gap: 4rem; align-items: center;
-    }
-
-    .hero-left { display: flex; flex-direction: column; gap: 2rem; }
-
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: .75rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .68rem; letter-spacing: .22em; color: var(--gold); text-transform: uppercase;
-      animation: fadeUp .8s .1s both;
-    }
-    .hero-tag::before { content:''; width:24px; height:1px; background:var(--gold); }
-
-    h1.hero-title {
-      font-family: 'Cormorant', serif;
-      font-size: clamp(3.6rem, 7.5vw, 6.8rem);
-      font-weight: 300; line-height: 1.04; letter-spacing: -.01em;
-      animation: fadeUp .8s .2s both;
-    }
-    h1.hero-title em { font-style: italic; color: var(--gold-light); }
-
-    .hero-desc {
-      font-size: .98rem; font-weight: 300;
-      color: var(--text-muted); line-height: 1.75; max-width: 430px;
-      animation: fadeUp .8s .35s both;
-    }
-
-    .hero-actions {
-      display: flex; align-items: center; gap: 2rem;
-      animation: fadeUp .8s .5s both;
-    }
-
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: .75rem;
-      background: var(--gold); color: var(--bg);
-      padding: .9rem 2rem;
-      font-size: .83rem; font-weight: 500; letter-spacing: .06em;
-      text-decoration: none; text-transform: uppercase;
-      transition: all .3s; position: relative; overflow: hidden;
-    }
-    .btn-primary::before {
-      content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
-      background: rgba(255,255,255,.14); transition: left .3s;
-    }
-    .btn-primary:hover::before { left:0; }
-    .btn-primary svg { transition: transform .3s; }
-    .btn-primary:hover svg { transform: translateX(4px); }
-
-    .btn-link {
-      font-size: .83rem; color: var(--text-muted); text-decoration: none;
-      letter-spacing: .05em; transition: color .3s;
-      display: flex; align-items: center; gap: .5rem;
-    }
-    .btn-link:hover { color: var(--text); }
-
-    .hero-right { display: flex; justify-content: center; align-items: center; }
-
-    .hero-geo { width: 420px; height: 420px; }
-    .hero-geo svg { width:100%; height:100%; }
-
-    /* Orbit animations */
-    @keyframes spin-cw  { from{transform:rotate(0)}   to{transform:rotate(360deg)} }
-    @keyframes spin-ccw { from{transform:rotate(360deg)} to{transform:rotate(0)}   }
-    @keyframes glow     { 0%,100%{opacity:.45} 50%{opacity:1} }
-    @keyframes fadeUp   { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes marquee  { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-    .ring-cw  { transform-origin:210px 210px; animation:spin-cw  22s linear infinite; }
-    .ring-ccw { transform-origin:210px 210px; animation:spin-ccw 30s linear infinite; }
-    .orbit-dot-a { transform-origin:210px 210px; animation:spin-cw  14s linear infinite; }
-    .orbit-dot-b { transform-origin:210px 210px; animation:spin-ccw 20s linear infinite; }
-    .center-dot  { animation: glow 2.5s ease-in-out infinite; }
-
-    /* Hero scroll arrow */
-    .hero-scroll {
-      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: .6rem;
-      z-index: 2; animation: fadeUp .8s .8s both;
-    }
-    .hero-scroll span {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .58rem; letter-spacing: .28em; color: var(--text-dim); text-transform: uppercase;
-    }
-    .scroll-line {
-      width: 1px; height: 44px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: glow 2s infinite;
-    }
-
-    /* ─── MARQUEE ─── */
-    .marquee-wrap {
-      overflow: hidden;
-      border-top: 1px solid var(--border-s);
-      border-bottom: 1px solid var(--border-s);
-      background: var(--bg-2); padding: .9rem 0;
-    }
-    .marquee-track {
-      display: flex; gap: 3.5rem; width: max-content;
-      animation: marquee 28s linear infinite;
-    }
-    .marquee-track:hover { animation-play-state: paused; }
-    .m-item {
-      display: flex; align-items: center; gap: 1.2rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--text-dim); white-space: nowrap;
-    }
-    .m-dot { width:4px; height:4px; border-radius:50%; background:var(--gold); flex-shrink:0; }
-
-    /* ─── SECTION COMMONS ─── */
-    section { padding: 6rem 3rem; }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
-
-    .section-eyebrow {
-      display: flex; align-items: center; gap: 1rem; margin-bottom: 3.5rem;
-    }
-    .ey-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .62rem; letter-spacing: .22em; color: var(--gold);
-    }
-    .ey-line { width:36px; height:1px; background:var(--border); }
-    .ey-text {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .62rem; letter-spacing: .22em; color: var(--text-muted); text-transform: uppercase;
-    }
-
-    .section-title {
-      font-family: 'Cormorant', serif;
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
-      font-weight: 300; line-height: 1.1;
-    }
-    .section-title em { font-style:italic; color:var(--gold-light); }
-
-    /* ─── SERVICES ─── */
-    #services { background: var(--bg-2); }
-
-    .services-grid {
-      margin-top: 4rem;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
-    }
-
-    .srv-card {
-      padding: 3rem 2.8rem;
-      background: var(--bg-3);
-      border: 1px solid var(--border-s);
-      position: relative; overflow: hidden;
-      transition: border-color .4s;
-    }
-    .srv-card::before {
-      content:''; position:absolute; inset:0 auto 0 0;
-      width:2px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      transform: scaleY(0); transform-origin: top;
-      transition: transform .45s ease;
-    }
-    .srv-card:hover { border-color: var(--border); }
-    .srv-card:hover::before { transform: scaleY(1); }
-
-    .srv-num {
-      font-family: 'Cormorant', serif;
-      font-size: 4.5rem; font-weight: 300;
-      color: var(--text-dim); line-height: 1;
-      display: block; margin-bottom: 1.5rem;
-      transition: color .4s;
-    }
-    .srv-card:hover .srv-num { color: var(--gold-dim); }
-
-    .srv-title {
-      font-family: 'Cormorant', serif;
-      font-size: 1.9rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.15;
-    }
-
-    .srv-desc {
-      font-size: .9rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2rem;
-    }
-
-    .srv-features { list-style:none; display:flex; flex-direction:column; gap:.55rem; }
-    .srv-features li {
-      display: flex; align-items: center; gap:.75rem;
-      font-size: .84rem; color: var(--text-muted);
-    }
-    .srv-features li::before { content:''; width:16px; height:1px; background:var(--gold); flex-shrink:0; }
-
-    /* ─── TOOLS ─── */
-    #tools { background: var(--bg); }
-
-    .tools-head {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 4rem; align-items: end;
-    }
-    .tools-sub { font-size:.94rem; color:var(--text-muted); line-height:1.75; }
-
-    .tools-grid {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 1px; background: var(--border-s);
-    }
-
-    .tool-card {
-      background: var(--bg); padding: 2.6rem;
-      position: relative; overflow: hidden;
-    }
-    .tool-card::after {
-      content:''; position:absolute; bottom:0; left:2.6rem; right:2.6rem;
-      height:1px;
-      background: linear-gradient(to right, var(--gold), transparent);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform .5s;
-    }
-    .tool-card:hover::after { transform: scaleX(1); }
-
-    .tool-icon {
-      width:46px; height:46px;
-      border: 1px solid var(--border-s);
-      display: flex; align-items:center; justify-content:center;
-      margin-bottom: 1.5rem;
-      transition: border-color .3s;
-    }
-    .tool-card:hover .tool-icon { border-color: var(--gold); }
-    .tool-icon svg { width:22px; height:22px; color:var(--gold); }
-
-    .tool-name {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .72rem; letter-spacing: .1em; color:var(--gold); margin-bottom:.45rem;
-    }
-    .tool-title {
-      font-family: 'Cormorant', serif;
-      font-size: 1.55rem; font-weight:400; margin-bottom:1rem;
-    }
-    .tool-desc { font-size:.85rem; color:var(--text-muted); line-height:1.65; }
-
-    /* ─── PROCESS ─── */
-    #process { background: var(--bg-2); }
-
-    .process-steps {
-      margin-top: 4.5rem;
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 0;
+    .hero {
       position: relative;
+      padding: clamp(5rem, 12vh, 9rem) 0 6rem;
+      text-align: center;
     }
-    .process-steps::before {
-      content:''; position:absolute; top:23px; left:5%; right:5%;
-      height:1px;
-      background: linear-gradient(to right, transparent, var(--border), var(--border), var(--border), transparent);
-      pointer-events:none;
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-2);
+      margin-bottom: 2.2rem;
+      animation: fadeUp .7s .05s both;
+    }
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+      50%      { box-shadow: 0 0 0 7px rgba(34,197,94,0); }
+    }
+    .hero h1 {
+      max-width: 880px; margin: 0 auto 1.6rem;
+      animation: fadeUp .7s .15s both;
+    }
+    .hero-sub {
+      max-width: 620px; margin: 0 auto 2.6rem;
+      color: var(--text-2); font-size: 1.08rem; line-height: 1.7;
+      animation: fadeUp .7s .3s both;
+    }
+    .hero-actions {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap;
+      animation: fadeUp .7s .45s both;
+    }
+    .hero-chips {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; flex-wrap: wrap;
+      margin-top: 3.2rem;
+      animation: fadeUp .7s .6s both;
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 0.82rem; font-weight: 500; color: var(--text-2);
+    }
+    .chip-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .chip-dot.p { background: var(--purple-l); }
+    .chip-dot.b { background: var(--blue-l); }
+    .chip-dot.a { background: var(--amber-l); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    .p-step { padding: 0 2rem; }
+    /* ─── SECTIONS ─── */
+    section { position: relative; padding: 6rem 0; }
 
-    .step-num {
-      width:46px; height:46px;
-      border: 1px solid var(--border-s);
-      background: var(--bg-2);
-      display:flex; align-items:center; justify-content:center;
-      font-family:'JetBrains Mono',monospace;
-      font-size:.68rem; letter-spacing:.12em; color:var(--gold);
-      margin-bottom:2rem; position:relative; z-index:1;
-      transition: all .35s;
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--purple-l);
+      margin-bottom: 1rem;
     }
-    .p-step:hover .step-num {
-      border-color: var(--gold);
-      background: var(--gold-dim);
-      box-shadow: 0 0 20px rgba(196,160,82,.12);
-    }
+    .section-head { max-width: 640px; margin-bottom: 3.5rem; }
+    .section-head p { color: var(--text-2); margin-top: 1.1rem; font-size: 1.02rem; }
 
-    .step-title {
-      font-family:'Cormorant',serif;
-      font-size:1.4rem; font-weight:400; margin-bottom:.75rem;
+    /* ─── MODULES ─── */
+    .modules-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
     }
-    .step-desc { font-size:.85rem; color:var(--text-muted); line-height:1.65; }
-
-    /* ─── CTA ─── */
-    #contact {
-      background: var(--bg);
-      text-align: center; padding: 9rem 3rem;
+    .mod-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
     }
-    .cta-inner { max-width: 680px; margin:0 auto; }
-
-    .cta-tag {
-      display:block; margin-bottom:2rem;
-      font-family:'JetBrains Mono',monospace;
-      font-size:.62rem; letter-spacing:.32em; color:var(--gold); text-transform:uppercase;
+    .mod-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-h);
+      background: var(--surface-h);
     }
-    .cta-title {
-      font-family:'Cormorant',serif;
-      font-size:clamp(2.8rem,6.5vw,5.2rem);
-      font-weight:300; line-height:1.08; margin-bottom:1.5rem;
+    .mod-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.1rem;
     }
-    .cta-title em { font-style:italic; color:var(--gold-light); }
+    .mod-icon svg { width: 22px; height: 22px; }
+    .mod-icon.p { background: rgba(124,58,237,0.15); color: var(--purple-l); }
+    .mod-icon.b { background: rgba(59,130,246,0.15);  color: var(--blue-l); }
+    .mod-icon.a { background: rgba(245,158,11,0.15);  color: var(--amber-l); }
+    .mod-card h3 { margin-bottom: 0.5rem; }
+    .mod-card p { font-size: 0.88rem; color: var(--text-2); line-height: 1.6; }
 
-    .cta-desc { font-size:.95rem; color:var(--text-muted); line-height:1.75; margin-bottom:3rem; }
+    /* ─── WHY ─── */
+    #why { background: var(--bg-2); }
+    #why::before, #why::after {
+      content: ''; position: absolute; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(124,58,237,0.3), transparent);
+    }
+    #why::before { top: 0; }
+    #why::after  { bottom: 0; }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+    }
+    .why-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+    .why-card:hover { transform: translateY(-4px); border-color: var(--border-h); }
+    .why-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+      font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
+      color: #fff; margin-bottom: 1.2rem;
+    }
+    .why-card h3 { margin-bottom: 0.6rem; }
+    .why-card p { font-size: 0.93rem; color: var(--text-2); }
 
+    /* ─── CTA BAND ─── */
+    .cta-band {
+      position: relative;
+      background: linear-gradient(135deg, var(--purple-d) 0%, #1e1b4b 60%, var(--bg-3) 100%);
+      border-top: 1px solid rgba(124,58,237,0.35);
+      border-bottom: 1px solid rgba(124,58,237,0.35);
+      text-align: center;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .cta-band h2 { margin-bottom: 1rem; }
+    .cta-band p {
+      color: var(--text-2); max-width: 520px;
+      margin: 0 auto 2.4rem; font-size: 1.05rem;
+    }
     .cta-actions {
-      display:flex; align-items:center; justify-content:center; gap:2rem; flex-wrap:wrap;
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap;
     }
 
-    .cta-email {
-      font-family:'JetBrains Mono',monospace; font-size:.85rem;
-      color:var(--text-muted); text-decoration:none; letter-spacing:.05em;
-      display:flex; align-items:center; gap:.75rem; transition:color .3s;
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid; grid-template-columns: 1.2fr 0.8fr;
+      gap: 48px; align-items: start;
     }
-    .cta-email::before { content:'→'; color:var(--gold); }
-    .cta-email:hover { color:var(--text); }
-
-    /* Divider line */
-    .hr-gold {
-      border:none; height:1px;
-      background: linear-gradient(to right, transparent, var(--border), transparent);
-      margin: 5rem auto; max-width:800px;
+    .about-text p { color: var(--text-2); font-size: 1.02rem; margin-top: 1.1rem; }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: var(--glow-p);
     }
+    .contact-card h3 { margin-bottom: 1.4rem; }
+    .contact-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 0;
+    }
+    .contact-row + .contact-row { border-top: 1px solid var(--border); }
+    .contact-row svg { width: 20px; height: 20px; color: var(--purple-l); flex-shrink: 0; }
+    .contact-row a {
+      color: var(--text); text-decoration: none;
+      font-weight: 500; font-size: 0.98rem;
+      transition: color .2s;
+    }
+    .contact-row a:hover { color: var(--purple-l); }
+    .contact-row span { font-size: 0.8rem; color: var(--text-3); display: block; }
 
     /* ─── FOOTER ─── */
     footer {
-      border-top: 1px solid var(--border-s);
-      padding: 2rem 3rem;
-      display:flex; align-items:center; justify-content:space-between;
+      border-top: 1px solid var(--border);
+      padding: 2.2rem 0;
+      position: relative; z-index: 1;
     }
-    .f-logo {
-      font-family:'Cormorant',serif;
-      font-size:1rem; letter-spacing:.22em; color:var(--text-muted);
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
     }
-    .f-copy {
-      font-family:'JetBrains Mono',monospace;
-      font-size:.58rem; letter-spacing:.16em; color:var(--text-dim);
+    .f-brand {
+      font-family: 'Outfit', sans-serif; font-weight: 700;
+      font-size: 0.95rem; color: var(--text-2);
     }
-    .f-links { display:flex; gap:1.5rem; }
+    .f-copy { font-size: 0.78rem; color: var(--text-3); }
+    .f-links { display: flex; gap: 22px; }
     .f-links a {
-      font-size:.75rem; color:var(--text-dim); text-decoration:none; transition:color .3s;
+      font-size: 0.82rem; color: var(--text-3);
+      text-decoration: none; transition: color .2s;
     }
-    .f-links a:hover { color:var(--gold); }
+    .f-links a:hover { color: var(--text); }
 
     /* ─── SCROLL REVEAL ─── */
     .reveal {
-      opacity:0; transform:translateY(22px);
+      opacity: 0; transform: translateY(22px);
       transition: opacity .7s ease, transform .7s ease;
     }
-    .reveal.vis { opacity:1; transform:translateY(0); }
+    .reveal.vis { opacity: 1; transform: translateY(0); }
 
     /* ─── RESPONSIVE ─── */
-    @media (max-width:960px) {
-      nav, nav.scrolled { padding: 1.2rem 1.5rem; }
-      #hero { padding: 8rem 1.5rem 4rem; }
-      .hero-content { grid-template-columns:1fr; gap:2rem; }
-      .hero-right { display:none; }
-      section { padding: 4rem 1.5rem; }
-      .services-grid { grid-template-columns:1fr; }
-      .tools-head { grid-template-columns:1fr; gap:2rem; }
-      .tools-grid { grid-template-columns:1fr; }
-      .process-steps { grid-template-columns:1fr 1fr; gap:3rem; }
-      .process-steps::before { display:none; }
-      footer { flex-direction:column; gap:1rem; text-align:center; }
+    @media (max-width: 960px) {
+      .modules-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      section { padding: 4.5rem 0; }
     }
-    @media (max-width:560px) {
-      .nav-links { display:none; }
-      .process-steps { grid-template-columns:1fr; }
+    @media (max-width: 560px) {
+      .nav-links li.nav-hide { display: none; }
+      .logo-name { font-size: 0.95rem; }
+      .nav .btn-sm { padding: 9px 16px; font-size: 0.8rem; white-space: nowrap; }
+      .modules-grid { grid-template-columns: 1fr; }
+      .hero { text-align: left; }
+      .hero-actions, .hero-chips { justify-content: flex-start; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb, .pulse-dot { animation: none; }
+      .hero-badge, .hero h1, .hero-sub, .hero-actions, .hero-chips { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
 
-  <div class="cursor"     id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-
-  <!-- ═══ NAV ═══ -->
-  <nav id="mainNav">
-    <a href="#" class="nav-logo">
-      <span class="nav-logo-name">ASTERION</span>
-      <span class="nav-logo-sub">Software · s.r.o.</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#services">Služby</a></li>
-      <li><a href="#tools">Nástroje</a></li>
-      <li><a href="#process">Proces</a></li>
-      <li><a href="#contact" class="nav-cta">Kontakt</a></li>
-    </ul>
-  </nav>
-
-  <!-- ═══ HERO ═══ -->
-  <section id="hero">
-    <canvas id="particles"></canvas>
-
-    <div class="hero-content">
-      <div class="hero-left">
-        <span class="hero-tag">AI automatizace &amp; vývoj software</span>
-
-        <h1 class="hero-title" style="animation-delay:.2s">
-          Nechte stroje<br>
-          <em>pracovat.</em><br>
-          Váš tým roste.
-        </h1>
-
-        <p class="hero-desc" style="animation-delay:.35s">
-          Automatizujeme firemní procesy a vyvíjíme aplikace na míru
-          s nejmodernějšími AI nástroji. Ušetříme vám čas,
-          peníze — a nervy.
-        </p>
-
-        <div class="hero-actions" style="animation-delay:.5s">
-          <a href="#contact" class="btn-primary">
-            Začít spolupráci
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
-          </a>
-          <a href="#services" class="btn-link">Prohlédnout služby</a>
-        </div>
-      </div>
-
-      <div class="hero-right">
-        <div class="hero-geo">
-          <svg viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Background rings -->
-            <circle cx="210" cy="210" r="192" stroke="rgba(196,160,82,.07)"  stroke-width="1"/>
-            <circle cx="210" cy="210" r="150" stroke="rgba(196,160,82,.05)"  stroke-width="1"/>
-            <!-- Animated dashed rings -->
-            <circle cx="210" cy="210" r="135" stroke="rgba(196,160,82,.18)" stroke-width="1"
-              stroke-dasharray="3 9" class="ring-cw"/>
-            <circle cx="210" cy="210" r="88"  stroke="rgba(196,160,82,.12)" stroke-width="1"
-              stroke-dasharray="2 7" class="ring-ccw"/>
-            <!-- Cross hairs -->
-            <line x1="210" y1="18" x2="210" y2="402" stroke="rgba(196,160,82,.05)" stroke-width="1"/>
-            <line x1="18"  y1="210" x2="402" y2="210" stroke="rgba(196,160,82,.05)" stroke-width="1"/>
-            <!-- Diagonals -->
-            <line x1="80"  y1="80"  x2="340" y2="340" stroke="rgba(196,160,82,.04)" stroke-width="1"/>
-            <line x1="340" y1="80"  x2="80"  y2="340" stroke="rgba(196,160,82,.04)" stroke-width="1"/>
-            <!-- Constellation points -->
-            <circle cx="285" cy="125" r="2"   fill="rgba(196,160,82,.7)"/>
-            <circle cx="145" cy="295" r="1.5" fill="rgba(196,160,82,.5)"/>
-            <circle cx="315" cy="295" r="1.5" fill="rgba(196,160,82,.55)"/>
-            <circle cx="125" cy="145" r="2"   fill="rgba(196,160,82,.65)"/>
-            <circle cx="320" cy="175" r="1.5" fill="rgba(196,160,82,.4)"/>
-            <!-- Constellation lines -->
-            <line x1="210" y1="210" x2="285" y2="125" stroke="rgba(196,160,82,.14)" stroke-width="1"/>
-            <line x1="210" y1="210" x2="145" y2="295" stroke="rgba(196,160,82,.14)" stroke-width="1"/>
-            <line x1="210" y1="210" x2="315" y2="295" stroke="rgba(196,160,82,.1)"  stroke-width="1"/>
-            <line x1="210" y1="210" x2="125" y2="145" stroke="rgba(196,160,82,.12)" stroke-width="1"/>
-            <line x1="285" y1="125" x2="315" y2="295" stroke="rgba(196,160,82,.06)" stroke-width="1"/>
-            <line x1="125" y1="145" x2="145" y2="295" stroke="rgba(196,160,82,.06)" stroke-width="1"/>
-            <line x1="285" y1="125" x2="320" y2="175" stroke="rgba(196,160,82,.07)" stroke-width="1"/>
-            <!-- Orbiting dots -->
-            <circle cx="210" cy="75" r="3.5" fill="rgba(196,160,82,.85)" class="orbit-dot-a"/>
-            <circle cx="350" cy="210" r="2.5" fill="rgba(196,160,82,.55)" class="orbit-dot-b"/>
-            <!-- Center -->
-            <circle cx="210" cy="210" r="5"   fill="rgba(196,160,82,.65)" class="center-dot"/>
-            <circle cx="210" cy="210" r="1.5" fill="rgba(196,160,82,1)"/>
-            <!-- Corner brackets -->
-            <path d="M22 46 L22 22 L46 22" stroke="rgba(196,160,82,.28)" stroke-width="1" fill="none"/>
-            <path d="M398 46 L398 22 L374 22" stroke="rgba(196,160,82,.28)" stroke-width="1" fill="none"/>
-            <path d="M22 374 L22 398 L46 398" stroke="rgba(196,160,82,.28)" stroke-width="1" fill="none"/>
-            <path d="M398 374 L398 398 L374 398" stroke="rgba(196,160,82,.28)" stroke-width="1" fill="none"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-scroll">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
-    </div>
-  </section>
-
-  <!-- ═══ MARQUEE ═══ -->
-  <div class="marquee-wrap">
-    <div class="marquee-track">
-      <div class="m-item"><span class="m-dot"></span>Automatizace workflowů</div>
-      <div class="m-item"><span class="m-dot"></span>Claude Code</div>
-      <div class="m-item"><span class="m-dot"></span>Firemní aplikace na míru</div>
-      <div class="m-item"><span class="m-dot"></span>Make.com</div>
-      <div class="m-item"><span class="m-dot"></span>OpenAI Codex</div>
-      <div class="m-item"><span class="m-dot"></span>Integrace API</div>
-      <div class="m-item"><span class="m-dot"></span>AI agenti</div>
-      <div class="m-item"><span class="m-dot"></span>Úspora času &amp; nákladů</div>
-      <!-- duplicate -->
-      <div class="m-item"><span class="m-dot"></span>Automatizace workflowů</div>
-      <div class="m-item"><span class="m-dot"></span>Claude Code</div>
-      <div class="m-item"><span class="m-dot"></span>Firemní aplikace na míru</div>
-      <div class="m-item"><span class="m-dot"></span>Make.com</div>
-      <div class="m-item"><span class="m-dot"></span>OpenAI Codex</div>
-      <div class="m-item"><span class="m-dot"></span>Integrace API</div>
-      <div class="m-item"><span class="m-dot"></span>AI agenti</div>
-      <div class="m-item"><span class="m-dot"></span>Úspora času &amp; nákladů</div>
-    </div>
+  <div class="grid-bg"></div>
+  <div class="orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
   </div>
 
-  <!-- ═══ SERVICES ═══ -->
-  <section id="services">
-    <div class="section-inner">
-      <div class="section-eyebrow reveal">
-        <span class="ey-num">01</span>
-        <span class="ey-line"></span>
-        <span class="ey-text">Služby</span>
+  <!-- ═══ HEADER ═══ -->
+  <header id="mainHeader">
+    <div class="wrap">
+      <nav class="nav">
+        <a href="#" class="logo">
+          <span class="logo-name">ASTERION SOFTWARE</span>
+          <span class="logo-sub">home of <em>Studijo</em></span>
+        </a>
+        <ul class="nav-links">
+          <li class="nav-hide"><a href="#studijo">Studijo</a></li>
+          <li class="nav-hide"><a href="#why">Proč Studijo</a></li>
+          <li class="nav-hide"><a href="#about">O nás</a></li>
+          <li><a href="https://studijo.io" class="btn btn-sm">Vyzkoušet Studijo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-badge"><span class="pulse-dot"></span>Home of Studijo</div>
+
+      <h1>Tvoříme <span class="grad-text">Studijo</span>.<br>AI studio, kde vzniká váš obsah.</h1>
+
+      <p class="hero-sub">
+        Jsme Asterion Software — česká firma za aplikací Studijo.
+        Z jednoho zadání v něm připravíte texty, grafiku, voiceover,
+        video, překlady i celé kurzy. Jedno přihlášení, jeden kontext,
+        od 590 Kč měsíčně.
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://studijo.io" class="btn">
+          Vyzkoušet zdarma
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+        <a href="#studijo" class="btn-ghost btn">Co Studijo umí</a>
       </div>
-      <h2 class="section-title reveal">Co pro vás <em>uděláme</em></h2>
 
-      <div class="services-grid">
-        <div class="srv-card reveal">
-          <span class="srv-num">01</span>
-          <h3 class="srv-title">Automatizace Workflowů</h3>
-          <p class="srv-desc">
-            Odstraníme repetitivní ruční práci z vašich procesů.
-            Propojíme vaše nástroje a data tak, aby systémy
-            pracovaly za vás — 24 hodin denně, 7 dní v týdnu.
-          </p>
-          <ul class="srv-features">
-            <li>Propojení firemních nástrojů (CRM, ERP, e-mail)</li>
-            <li>Automatické reporty a notifikace</li>
-            <li>Zpracování formulářů a dat v reálném čase</li>
-            <li>Integrace AI agentů do existujících procesů</li>
-            <li>Monitoring, alerting a error handling</li>
-          </ul>
-        </div>
-
-        <div class="srv-card reveal" style="transition-delay:.12s">
-          <span class="srv-num">02</span>
-          <h3 class="srv-title">Firemní Aplikace</h3>
-          <p class="srv-desc">
-            Vyvíjíme interní nástroje a aplikace přesně
-            podle vašich potřeb. Žádné kompromisy —
-            jen software, který funguje pro váš tým.
-          </p>
-          <ul class="srv-features">
-            <li>Interní dashboardy a admin systémy</li>
-            <li>CRM a projektové nástroje na míru</li>
-            <li>Datové portály a reportingové aplikace</li>
-            <li>AI-powered business nástroje</li>
-            <li>Integrace s existujícími systémy a API</li>
-          </ul>
-        </div>
+      <div class="hero-chips">
+        <span class="chip"><span class="chip-dot p"></span>Texty</span>
+        <span class="chip"><span class="chip-dot b"></span>Grafika</span>
+        <span class="chip"><span class="chip-dot a"></span>Audio</span>
+        <span class="chip"><span class="chip-dot p"></span>Video</span>
+        <span class="chip"><span class="chip-dot b"></span>Překlady</span>
+        <span class="chip"><span class="chip-dot a"></span>Kurzy</span>
       </div>
     </div>
   </section>
 
-  <!-- ═══ TOOLS ═══ -->
-  <section id="tools">
-    <div class="section-inner">
-      <div class="tools-head">
-        <div>
-          <div class="section-eyebrow reveal">
-            <span class="ey-num">02</span>
-            <span class="ey-line"></span>
-            <span class="ey-text">Nástroje</span>
-          </div>
-          <h2 class="section-title reveal">Technologie,<br>které <em>fungují</em></h2>
-        </div>
-        <p class="tools-sub reveal">
-          Pracujeme výhradně s prověřenými, špičkovými AI nástroji.
-          Kombinací těchto platforem dosahujeme výsledků,
-          které by běžnému týmu vývojářů trvaly měsíce.
+  <!-- ═══ STUDIJO MODULES ═══ -->
+  <section id="studijo">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Produkt</span>
+        <h2>Jedno studio.<br>Všechen obsah.</h2>
+        <p>
+          Studijo nahrazuje pět různých nástrojů jedním místem.
+          Zadání vložíte jednou — a generujete ve všech formátech,
+          aniž byste cokoliv přepisovali.
         </p>
       </div>
 
-      <div class="tools-grid">
-        <div class="tool-card reveal">
-          <div class="tool-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="4" width="18" height="16" rx="2"/>
-              <path d="M8 9l3 3-3 3M13 15h3"/>
+      <div class="modules-grid">
+        <div class="mod-card reveal">
+          <div class="mod-icon p">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"/>
             </svg>
           </div>
-          <div class="tool-name">claude_code</div>
-          <h3 class="tool-title">Claude Code</h3>
-          <p class="tool-desc">
-            Anthropic's AI pro autonomní programování.
-            Analyzuje, píše a refaktoruje kód s hlubokým
-            pochopením celého projektu. Vývoj 10× rychleji.
-          </p>
+          <h3>Chat</h3>
+          <p>AI chat s výběrem modelů — Claude, GPT, Gemini, Grok i DeepSeek. S kontextem z vašich dokumentů.</p>
         </div>
 
-        <div class="tool-card reveal" style="transition-delay:.1s">
-          <div class="tool-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-              <polyline points="2 17 12 22 22 17"/>
-              <polyline points="2 12 12 17 22 12"/>
+        <div class="mod-card reveal" style="transition-delay:.05s">
+          <div class="mod-icon b">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18M9 21V9"/>
             </svg>
           </div>
-          <div class="tool-name">openai_codex</div>
-          <h3 class="tool-title">OpenAI Codex</h3>
-          <p class="tool-desc">
-            Generování, analýza a optimalizace kódu
-            nejpokročilejšími jazykovými modely. Ideální
-            pro komplexní algoritmické výzvy a refactoring.
-          </p>
+          <h3>Šablony</h3>
+          <p>Připravené workflow pro produktové popisy, sociální příspěvky nebo e-maily. Bez promptování.</p>
         </div>
 
-        <div class="tool-card reveal" style="transition-delay:.2s">
-          <div class="tool-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        <div class="mod-card reveal" style="transition-delay:.1s">
+          <div class="mod-icon a">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <path d="M21 15l-5-5L5 21"/>
             </svg>
           </div>
-          <div class="tool-name">make.com</div>
-          <h3 class="tool-title">Make.com</h3>
-          <p class="tool-desc">
-            Vizuální platforma pro automatizaci propojující
-            přes 1 500 aplikací. Výkonné workflow bez kódu
-            — nebo s kódem, dle složitosti úkolu.
-          </p>
+          <h3>Grafika</h3>
+          <p>Bannery, vizuály a ilustrace z textu přes nejnovější modely Gemini a GPT Image.</p>
+        </div>
+
+        <div class="mod-card reveal" style="transition-delay:.15s">
+          <div class="mod-icon p">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 10v4M7 7v10M11 4v16M15 7v10M19 10v4"/>
+            </svg>
+          </div>
+          <h3>Audio</h3>
+          <p>Profesionální voiceover z textu přes ElevenLabs. Hotové MP3 v minutách.</p>
+        </div>
+
+        <div class="mod-card reveal" style="transition-delay:.2s">
+          <div class="mod-icon b">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="5" width="14" height="14" rx="2"/>
+              <path d="M16 10l6-3v10l-6-3"/>
+            </svg>
+          </div>
+          <h3>Video</h3>
+          <p>Krátká promo videa z textu a referenčních obrázků. Pro sociální sítě i kampaně.</p>
+        </div>
+
+        <div class="mod-card reveal" style="transition-delay:.25s">
+          <div class="mod-icon a">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/>
+            </svg>
+          </div>
+          <h3>Překladač</h3>
+          <p>Texty a dokumenty v 9 jazycích s automatickou detekcí. Výsledek vidíte průběžně.</p>
+        </div>
+
+        <div class="mod-card reveal" style="transition-delay:.3s">
+          <div class="mod-icon p">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10L12 5 2 10l10 5 10-5z"/>
+              <path d="M6 12v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5"/>
+            </svg>
+          </div>
+          <h3>Kurzy</h3>
+          <p>Generátor e-learningu od osnovy po hotové HTML lekce s kvízy a audio narrací.</p>
+        </div>
+
+        <div class="mod-card reveal" style="transition-delay:.35s">
+          <div class="mod-icon b">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <path d="M14 2v6h6M9 13h6M9 17h6"/>
+            </svg>
+          </div>
+          <h3>Dokumenty &amp; kontext</h3>
+          <p>Nahrajete brand manuál nebo produktový list jednou — AI ho pak používá ve všech výstupech.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ PROCESS ═══ -->
-  <section id="process">
-    <div class="section-inner">
-      <div class="section-eyebrow reveal">
-        <span class="ey-num">03</span>
-        <span class="ey-line"></span>
-        <span class="ey-text">Jak pracujeme</span>
+  <!-- ═══ WHY STUDIJO ═══ -->
+  <section id="why">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Proč Studijo</span>
+        <h2>Jeden nástroj místo pěti</h2>
+        <p>
+          ChatGPT na texty, Canva na vizuály, ElevenLabs na voiceover,
+          DeepL na překlady — to jsou čtyři přihlášení a čtyři faktury.
+          Studijo to celé nahrazuje jedním místem.
+        </p>
       </div>
-      <h2 class="section-title reveal">Čtyři kroky<br>ke <em>změně</em></h2>
 
-      <div class="process-steps">
-        <div class="p-step reveal">
-          <div class="step-num">01</div>
-          <h3 class="step-title">Analýza</h3>
-          <p class="step-desc">
-            Zmapujeme vaše aktuální procesy, identifikujeme
-            bottlenecky a příležitosti pro automatizaci.
-          </p>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <span class="why-num">1</span>
+          <h3>Vše na jednom místě</h3>
+          <p>Text, grafika, audio, video, překlady i kurzy. Jedno přihlášení, jeden workflow, jeden kreditový systém.</p>
         </div>
 
-        <div class="p-step reveal" style="transition-delay:.1s">
-          <div class="step-num">02</div>
-          <h3 class="step-title">Návrh</h3>
-          <p class="step-desc">
-            Navrhneme konkrétní řešení s odhadem úspor
-            času a ROI. Bez zbytečného technického žargonu.
-          </p>
+        <div class="why-card reveal" style="transition-delay:.08s">
+          <span class="why-num">2</span>
+          <h3>Kontext zůstane s vámi</h3>
+          <p>Podklady nahrajete jednou. Každý výstup pak drží tón, terminologii i konkrétní fakta vaší značky — bez opakovaného vysvětlování.</p>
         </div>
 
-        <div class="p-step reveal" style="transition-delay:.2s">
-          <div class="step-num">03</div>
-          <h3 class="step-title">Realizace</h3>
-          <p class="step-desc">
-            Implementace s průběžnými aktualizacemi.
-            Vy sledujete postup, my dodáváme výsledky.
-          </p>
+        <div class="why-card reveal" style="transition-delay:.16s">
+          <span class="why-num">3</span>
+          <h3>Od nápadu k obsahu za minuty</h3>
+          <p>Žádné přenášení textu mezi aplikacemi, žádné přepisování zadání. Stáhnete hotový soubor: obrázek, MP3, video nebo celý kurz.</p>
         </div>
 
-        <div class="p-step reveal" style="transition-delay:.3s">
-          <div class="step-num">04</div>
-          <h3 class="step-title">Podpora</h3>
-          <p class="step-desc">
-            Průběžná optimalizace, monitoring a podpora.
-            Systémy, které fungují spolehlivě dlouhodobě.
-          </p>
+        <div class="why-card reveal" style="transition-delay:.24s">
+          <span class="why-num">4</span>
+          <h3>Levnější než agentura</h3>
+          <p>Výkonnější než jeden nástroj. Starter od 590 Kč měsíčně — a 500 kreditů zdarma na vyzkoušení.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ CTA / CONTACT ═══ -->
-  <section id="contact">
-    <div class="cta-inner">
-      <span class="cta-tag reveal">Začněme spolupráci</span>
-      <h2 class="cta-title reveal">
-        Ušetřeme váš<br>
-        <em>nejcennější</em><br>
-        zdroj — čas.
-      </h2>
-      <p class="cta-desc reveal">
-        Nezávazná konzultace zdarma. Zavolejte nám —
-        probereme konkrétní návrhy šité přesně pro vaši firmu.
+  <!-- ═══ CTA BAND ═══ -->
+  <section class="cta-band">
+    <div class="wrap">
+      <h2 class="reveal">Vyzkoušejte Studijo zdarma</h2>
+      <p class="reveal">
+        500 kreditů na úvod. První texty, vizuály nebo voiceover
+        máte hotové za pár minut.
       </p>
       <div class="cta-actions reveal">
-        <a href="tel:+420604257866" class="cta-email">+420 604 257 866</a>
+        <a href="https://studijo.io" class="btn">
+          Otevřít studijo.io
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+        <a href="https://studijo.io/pricing" class="btn-ghost btn">Zobrazit ceník</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT / CONTACT ═══ -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <span class="eyebrow">O nás</span>
+          <h2>Kdo stojí za Studijo</h2>
+          <p>
+            Asterion Software, s.r.o. je česká softwarová firma z Prahy.
+            Stavíme Studijo — AI content studio pro malé firmy, freelancery,
+            agentury a tvůrce kurzů v Česku i okolních zemích.
+          </p>
+          <p>
+            Produkt vyvíjíme s nejnovějšími AI modely a rozvíjíme ho podle
+            zpětné vazby uživatelů. Naším cílem je jednoduchý nástroj,
+            který nahradí roztříštěný stack drahých aplikací — a vrátí vám
+            čas na práci, která vás živí.
+          </p>
+        </div>
+
+        <div class="contact-card reveal" id="contact" style="transition-delay:.1s">
+          <h3>Kontakt</h3>
+          <div class="contact-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <div>
+              <span>Telefon</span>
+              <a href="tel:+420604257866">+420 604 257 866</a>
+            </div>
+          </div>
+          <div class="contact-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <div>
+              <span>Produkt</span>
+              <a href="https://studijo.io">studijo.io</a>
+            </div>
+          </div>
+          <div class="contact-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <div>
+              <span>Sídlo</span>
+              Bělehradská 858/23, 120 00 Praha 2
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ═══ FOOTER ═══ -->
   <footer>
-    <span class="f-logo">ASTERION SOFTWARE</span>
-    <span class="f-copy">© 2026 Asterion Software, s.r.o. &nbsp;·&nbsp; IČ: 10736697 &nbsp;·&nbsp; Bělehradská 858/23, 120 00 Praha 2</span>
-    <div class="f-links">
-      <a href="#">Ochrana dat</a>
-      <a href="#">Podmínky</a>
+    <div class="wrap">
+      <div class="footer-inner">
+        <span class="f-brand">ASTERION SOFTWARE</span>
+        <span class="f-copy">© 2026 Asterion Software, s.r.o. · IČ: 10736697 · DIČ: CZ10736697 · Bělehradská 858/23, 120 00 Praha 2</span>
+        <div class="f-links">
+          <a href="https://studijo.io">studijo.io</a>
+          <a href="https://studijo.io/privacy">Ochrana soukromí</a>
+          <a href="https://studijo.io/terms">Podmínky</a>
+        </div>
+      </div>
     </div>
   </footer>
 
   <script>
-    /* ── CURSOR ── */
-    const cursor     = document.getElementById('cursor');
-    const cursorRing = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx + 'px';
-      cursor.style.top  = my + 'px';
-    });
-
-    (function tickRing() {
-      rx += (mx - rx) * .13;
-      ry += (my - ry) * .13;
-      cursorRing.style.left = rx + 'px';
-      cursorRing.style.top  = ry + 'px';
-      requestAnimationFrame(tickRing);
-    })();
-
-    document.querySelectorAll('a, button, .srv-card, .tool-card, .p-step').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursorRing.style.transform = 'translate(-50%,-50%) scale(1.9)';
-        cursorRing.style.borderColor = 'rgba(196,160,82,.55)';
-        cursor.style.transform = 'translate(-50%,-50%) scale(.5)';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursorRing.style.transform = 'translate(-50%,-50%) scale(1)';
-        cursorRing.style.borderColor = 'rgba(196,160,82,.35)';
-        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-      });
-    });
-
-    /* ── NAV SCROLL ── */
-    const nav = document.getElementById('mainNav');
+    /* ── HEADER SCROLL ── */
+    const header = document.getElementById('mainHeader');
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
+      header.classList.toggle('scrolled', window.scrollY > 50);
     }, { passive: true });
-
-    /* ── PARTICLES ── */
-    const canvas = document.getElementById('particles');
-    const ctx    = canvas.getContext('2d');
-
-    function resize() {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-
-    class Particle {
-      constructor() { this.init(); }
-      init() {
-        this.x  = Math.random() * canvas.width;
-        this.y  = Math.random() * canvas.height;
-        this.vx = (Math.random() - .5) * .28;
-        this.vy = (Math.random() - .5) * .28;
-        this.r  = Math.random() * 1.4 + .4;
-        this.a  = Math.random() * .55 + .15;
-      }
-      update() {
-        this.x += this.vx; this.y += this.vy;
-        if (this.x < 0 || this.x > canvas.width ||
-            this.y < 0 || this.y > canvas.height) this.init();
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(196,160,82,${this.a})`;
-        ctx.fill();
-      }
-    }
-
-    const pts = Array.from({ length: 55 }, () => new Particle());
-
-    function drawLines() {
-      for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 1; j < pts.length; j++) {
-          const dx = pts[i].x - pts[j].x;
-          const dy = pts[i].y - pts[j].y;
-          const d  = Math.sqrt(dx*dx + dy*dy);
-          if (d < 115) {
-            ctx.beginPath();
-            ctx.moveTo(pts[i].x, pts[i].y);
-            ctx.lineTo(pts[j].x, pts[j].y);
-            ctx.strokeStyle = `rgba(196,160,82,${(1 - d/115) * .14})`;
-            ctx.lineWidth = .5;
-            ctx.stroke();
-          }
-        }
-      }
-    }
-
-    (function tick() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      pts.forEach(p => { p.update(); p.draw(); });
-      drawLines();
-      requestAnimationFrame(tick);
-    })();
 
     /* ── SCROLL REVEAL ── */
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
-    }, { threshold: .14 });
+    }, { threshold: 0.14 });
 
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   </script>
