@@ -170,6 +170,7 @@
       --line: rgba(255,255,255,.09);
       --accent: #7c5cff;
       --accent-2: #31d7c6;
+      --accent-3: #ff8a3d;
       --warning: #ffb454;
       --success: #67e8a2;
       --shadow: 0 20px 60px rgba(0,0,0,.28);
@@ -225,7 +226,14 @@
     .nav-links a:hover { color:white; }
     .nav-cta { padding:11px 16px; border-radius:12px; background:white; color:#0b1020; font-weight:700; }
 
-    .hero { padding: 88px 0 56px; }
+    .hero { padding: 88px 0 56px; position:relative; isolation:isolate; overflow:hidden; }
+    .hero::before {
+      content:""; position:absolute; inset:0; z-index:-1;
+      background:
+        linear-gradient(90deg, var(--bg) 0%, rgba(11,16,32,.88) 38%, rgba(11,16,32,.35) 72%, rgba(11,16,32,.55) 100%),
+        linear-gradient(0deg, var(--bg) 0%, transparent 28%),
+        url(img/hero.webp) 70% center / cover no-repeat;
+    }
     .hero-grid { display:grid; grid-template-columns: 1.2fr .8fr; gap:54px; align-items:center; }
     .eyebrow {
       display:inline-flex; align-items:center; gap:9px;
@@ -250,6 +258,7 @@
     .hero-card {
       background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
       border:1px solid var(--line); border-radius:28px; padding:22px; box-shadow:var(--shadow);
+      backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); background-color:rgba(11,16,32,.45);
     }
     .mini-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
     .badge { font-size:12px; padding:7px 10px; border-radius:999px; background:rgba(124,92,255,.16); color:#c9bdff; border:1px solid rgba(124,92,255,.28); }
@@ -281,7 +290,12 @@
       transition:.22s ease;
     }
     .service-card:hover { transform:translateY(-4px); border-color:rgba(255,255,255,.20); box-shadow:var(--shadow); }
-    .service-icon { width:42px; height:42px; display:grid; place-items:center; border-radius:13px; background:rgba(124,92,255,.14); font-size:20px; margin-bottom:18px; }
+    .service-icon {
+      width:96px; height:96px; margin:-10px 0 8px -12px; mix-blend-mode:screen;
+      -webkit-mask-image:radial-gradient(circle, #000 58%, transparent 71%); mask-image:radial-gradient(circle, #000 58%, transparent 71%);
+      transition:transform .3s ease;
+    }
+    .service-card:hover .service-icon { transform:translateY(-3px) scale(1.04); }
     .service-card h3 { margin:0 0 10px; font-size:22px; letter-spacing:-.025em; }
     .service-card p { color:var(--muted); margin:0 0 18px; }
     .chips { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px; }
@@ -316,6 +330,12 @@
     .stat strong { display:block; }
     .stat span { color:var(--muted); font-size:12px; }
 
+    #skoleni { position:relative; isolation:isolate; }
+    #skoleni::before {
+      content:""; position:absolute; inset:0; z-index:-1; background:url(img/bg-texture.webp) center / cover no-repeat;
+      -webkit-mask-image:linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent); mask-image:linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent);
+    }
+    .training-card { backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
     .training-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
     .training-card { border:1px solid var(--line); border-radius:20px; padding:22px; background:rgba(255,255,255,.025); }
     .training-card h3 { margin:0 0 8px; font-size:22px; }
@@ -333,6 +353,8 @@
     .about-copy h2 { margin-top:0; font-size:44px; letter-spacing:-.04em; }
     .about-copy p { color:var(--muted); }
     .stack { display:flex; gap:8px; flex-wrap:wrap; margin-top:18px; }
+    .about-visual { margin:28px 0 0; border-radius:22px; overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow); }
+    .about-visual img { width:100%; height:auto; }
 
     .cta-box {
       padding:34px; border-radius:28px; border:1px solid var(--line);
@@ -391,6 +413,24 @@
     .faq-item[open] summary::after { content:"−"; }
     .faq-item p { margin:0; padding:0 20px 18px; color:var(--muted); }
 
+    /* Oranžový akcent */
+    ::selection { background:var(--accent-3); color:#0b1020; }
+    .accent-dot { color:var(--accent-3); -webkit-text-fill-color:var(--accent-3); }
+    .badge-orange { background:rgba(255,138,61,.14); color:#ffc29a; border-color:rgba(255,138,61,.32); }
+    .section-head .eyebrow::before { content:""; width:7px; height:7px; border-radius:2px; background:var(--accent-3); box-shadow:0 0 12px rgba(255,138,61,.7); }
+    .strip-item strong::before { content:""; display:block; width:22px; height:3px; border-radius:3px; background:var(--accent-3); margin-bottom:10px; }
+    .training-card .duration { color:var(--accent-3); }
+    .training-card li::marker { color:var(--accent-3); }
+    .text-link { transition:color .2s ease; }
+    .service-card:hover .text-link { color:var(--accent-3); }
+    .faq-item { transition:border-color .2s ease; }
+    .faq-item[open] { border-color:rgba(255,138,61,.35); }
+    .faq-item[open] summary::after { color:var(--accent-3); }
+    .cta-box { position:relative; overflow:hidden; isolation:isolate; }
+    .cta-box::before { content:""; position:absolute; z-index:-1; width:520px; height:520px; left:-180px; bottom:-240px; border-radius:50%; background:radial-gradient(circle, rgba(255,138,61,.32), transparent 65%); pointer-events:none; }
+    .nav-cta { transition:box-shadow .2s ease; }
+    .nav-cta:hover { box-shadow:0 0 0 3px rgba(255,138,61,.45); }
+
     .hidden { display:none !important; }
 
     @media (max-width: 920px) {
@@ -399,6 +439,13 @@
       .strip-grid { grid-template-columns:1fr 1fr; }
       .strip-item:nth-child(2) { border-right:0; }
       .nav-links a:not(.nav-cta) { display:none; }
+    }
+    @media (max-width: 920px) {
+      .hero::before {
+        background:
+          linear-gradient(180deg, rgba(11,16,32,.55) 0%, rgba(11,16,32,.85) 45%, var(--bg) 100%),
+          url(img/hero-960.webp) center top / cover no-repeat;
+      }
     }
     @media (max-width: 640px) {
       .container { width:min(100% - 24px, var(--max)); }
@@ -436,7 +483,7 @@
       <div class="container hero-grid">
         <div>
           <div class="eyebrow"><span class="eyebrow-dot"></span> Vývoj software • AI • automatizace • školení</div>
-          <h1><span class="gradient-text">AI, automatizace a vývoj aplikací</span> pro firmy</h1>
+          <h1><span class="gradient-text">AI, automatizace a vývoj aplikací</span> pro firmy<span class="accent-dot">.</span></h1>
           <p><strong style="color:white;">Software služby trochu jinak.</strong> Vyberte si konkrétní problém, který chcete vyřešit. Od AI auditu a automatizace po vývoj webové aplikace, integraci LLM nebo firemní školení.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#sluzby">Prohlédnout služby ↓</a>
@@ -447,7 +494,7 @@
         <div class="hero-card" aria-label="Ukázka katalogu služeb">
           <div class="mini-top">
             <strong>Katalog služeb</strong>
-            <span class="badge">bez košíku :)</span>
+            <span class="badge badge-orange">bez košíku :)</span>
           </div>
           <div class="service-preview">
             <div class="preview-item">
@@ -495,7 +542,7 @@
 
         <div class="services-grid" id="servicesGrid">
           <article class="service-card" data-category="ai consulting" data-service="AI audit firmy" data-price="od 14 900 Kč">
-            <div class="service-icon">⌁</div>
+            <img class="service-icon" src="img/icon-ai-audit.webp" width="96" height="96" alt="" loading="lazy" decoding="async">
             <h3>AI audit firmy</h3>
             <p>Najdeme procesy, kde AI nebo automatizace mohou reálně šetřit čas, náklady nebo zvýšit výkon týmu.</p>
             <div class="chips"><span class="chip">1–2 dny</span><span class="chip">report + roadmapa</span></div>
@@ -503,7 +550,7 @@
           </article>
 
           <article class="service-card" data-category="ai dev" data-service="Automatizace firemního procesu" data-price="individuálně">
-            <div class="service-icon">⚙</div>
+            <img class="service-icon" src="img/icon-automatizace.webp" width="96" height="96" alt="" loading="lazy" decoding="async">
             <h3>Automatizace procesu</h3>
             <p>Máte workflow plné e‑mailů, Excelů a copy‑paste? Navrhneme a postavíme jednodušší cestu.</p>
             <div class="chips"><span class="chip">integrace</span><span class="chip">API</span><span class="chip">LLM</span></div>
@@ -511,7 +558,7 @@
           </article>
 
           <article class="service-card" data-category="ai dev" data-service="Interní AI asistent" data-price="od 35 000 Kč">
-            <div class="service-icon">◈</div>
+            <img class="service-icon" src="img/icon-ai-asistent.webp" width="96" height="96" alt="" loading="lazy" decoding="async">
             <h3>Interní AI asistent</h3>
             <p>Chat nad firemní dokumentací, know‑how a daty. S důrazem na přístupová práva a dohledatelnost zdrojů.</p>
             <div class="chips"><span class="chip">RAG</span><span class="chip">dokumenty</span><span class="chip">API</span></div>
@@ -519,7 +566,7 @@
           </article>
 
           <article class="service-card" data-category="dev" data-service="Webová aplikace na míru" data-price="od 80 000 Kč">
-            <div class="service-icon">▣</div>
+            <img class="service-icon" src="img/icon-webova-aplikace.webp" width="96" height="96" alt="" loading="lazy" decoding="async">
             <h3>Webová aplikace na míru</h3>
             <p>MVP, interní systém nebo zákaznický portál. Backend, databáze, integrace i nasazení.</p>
             <div class="chips"><span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">cloud</span></div>
@@ -527,7 +574,7 @@
           </article>
 
           <article class="service-card" data-category="dev consulting" data-service="Excel → aplikace" data-price="od 45 000 Kč">
-            <div class="service-icon">↗</div>
+            <img class="service-icon" src="img/icon-excel-aplikace.webp" width="96" height="96" alt="" loading="lazy" decoding="async">
             <h3>Excel → aplikace</h3>
             <p>Kritický Excel, tabulka nebo ruční agenda se změní v normální webovou aplikaci s uživateli a historií.</p>
             <div class="chips"><span class="chip">workflow</span><span class="chip">datový model</span></div>
@@ -535,7 +582,7 @@
           </article>
 
           <article class="service-card" data-category="consulting dev" data-service="Java / Spring konzultace" data-price="od 2 500 Kč/h">
-            <div class="service-icon">{ }</div>
+            <img class="service-icon" src="img/icon-java-spring.webp" width="96" height="96" alt="" loading="lazy" decoding="async">
             <h3>Java / Spring konzultace</h3>
             <p>Architektura, výkon, code review, legacy systémy, integrace a řešení problémů v produkci.</p>
             <div class="chips"><span class="chip">senior review</span><span class="chip">backend</span></div>
@@ -647,6 +694,9 @@
           <p>Asterion Software je malé vývojářské studio zaměřené na backendové systémy, AI integrace a automatizaci. U menších a středních projektů klient komunikuje přímo se seniorním vývojářem.</p>
           <p>To je vhodné hlavně tam, kde je potřeba rychle pochopit problém, navrhnout pragmatické řešení a nevytvářet zbytečnou procesní režii.</p>
           <div class="stack"><span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">PostgreSQL</span><span class="chip">Docker</span><span class="chip">Azure</span><span class="chip">LLM API</span><span class="chip">RAG</span><span class="chip">AI workflow</span></div>
+          <figure class="about-visual">
+            <img src="img/ai-flow.webp" width="1400" height="799" alt="Schéma: dokumenty, data, média a API vstupují do AI, která z nich vytváří automatizace, přehledy a akce" loading="lazy" decoding="async">
+          </figure>
         </div>
       </div>
     </section>
