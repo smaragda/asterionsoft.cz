@@ -1,0 +1,63 @@
+# Asterion Software
+
+> Asterion Software, s.r.o. je malé české softwarové studio z Prahy. Dodává AI audity, automatizaci firemních procesů, interní AI asistenty, webové aplikace na míru, Java/Spring konzultace a praktická firemní školení AI. Klient komunikuje přímo se seniorním vývojářem, bez obchodní mezivrstvy. Zakladatel: Jan Marcis ([LinkedIn](https://www.linkedin.com/in/jan-marcis-b8335111/)). Autor a provozovatel AI platformy Studijo.
+
+Zaměření: B2B, malé a střední firmy v Česku. Komunikace v češtině. Technologie: Java, Spring Boot, PostgreSQL, Docker, Azure, LLM API (GPT, Claude, Gemini), RAG, AI workflow.
+
+## Služby
+
+Ceny jsou orientační, bez DPH; finální cena závisí na rozsahu.
+
+- [AI audit firmy](https://asterionsoft.cz/#sluzby): Analýza procesů, kde AI nebo automatizace reálně šetří čas a náklady. Délka 1–2 dny, výstup report a roadmapa. Od 14 900 Kč.
+- [Automatizace firemního procesu](https://asterionsoft.cz/#sluzby): Workflow plné e‑mailů, Excelů a ručního kopírování převedené na automatizovaný proces (integrace, API, LLM). Cena individuálně podle rozsahu.
+- [Interní AI asistent](https://asterionsoft.cz/#sluzby): Chat nad firemní dokumentací, know‑how a daty (RAG) s přístupovými právy a dohledatelností zdrojů. Pilot od 35 000 Kč.
+- [Webová aplikace na míru](https://asterionsoft.cz/#sluzby): MVP, interní systém nebo zákaznický portál — backend, databáze, integrace i nasazení. MVP od 80 000 Kč.
+- [Excel → aplikace](https://asterionsoft.cz/#sluzby): Kritická tabulka nebo ruční agenda převedená na webovou aplikaci s uživateli a historií změn. Typicky od 45 000 Kč.
+- [Java / Spring konzultace](https://asterionsoft.cz/#sluzby): Architektura, výkon, code review, legacy systémy, integrace a řešení problémů v produkci. Od 2 500 Kč/h.
+
+## Firemní školení AI
+
+- [AI Start (3 hodiny)](https://asterionsoft.cz/#skoleni): ChatGPT / Claude, prompting, práce s dokumenty, research a shrnutí, bezpečnost a limity.
+- [AI Prakticky (1 den)](https://asterionsoft.cz/#skoleni): Pracovní use‑cases, automatizace rutiny, tvorba vlastních workflow, Q&A nad agendou firmy.
+- [Automation Workshop (1 den)](https://asterionsoft.cz/#skoleni): Mapování procesů, výběr vhodné automatizace, návrh řešení a roadmapa implementace.
+
+## Reference
+
+- [Studijo](https://studijo.io): Vlastní SaaS produkt Asterion Software — AI content studio, kde z jednoho zadání vzniká text, grafika, voiceover, video, překlady i kurzy. Více AI modelů, asynchronní zpracování úloh, kreditní systém a billing.
+
+## Časté otázky
+
+### Kolik stojí AI audit firmy?
+
+AI audit firmy stojí od 14 900 Kč a trvá 1–2 dny. Projdeme vaše procesy, najdeme místa, kde AI nebo automatizace reálně šetří čas či náklady, a výstupem je report s doporučeními a roadmapou dalších kroků.
+
+### Kolik stojí interní AI asistent nad firemními dokumenty?
+
+Pilotní verze interního AI asistenta stojí od 35 000 Kč. Výsledná cena závisí hlavně na počtu a typu zdrojů dat, potřebných integracích a nastavení přístupových práv. Asistent odpovídá nad vaší dokumentací a u odpovědí uvádí zdroje.
+
+### Jak probíhá spolupráce?
+
+Začínáme krátkou nezávaznou konzultací, kde upřesníme cíl. Pak navrhneme řešení a rozsah s jasně definovaným výstupem. Po dodání můžeme navázat další implementací nebo dlouhodobou spoluprací.
+
+### S kým budu během projektu komunikovat?
+
+Přímo se seniorním vývojářem, který řešení navrhuje a staví. Mezi vámi a vývojem není žádná obchodní ani projektová mezivrstva, takže otázky se řeší rychle a bez tichých telefonů.
+
+### Můžete převést firemní Excel na aplikaci?
+
+Ano. Kritickou tabulku nebo ruční agendu převedeme na webovou aplikaci s uživateli, oprávněními a historií změn. Typicky od 45 000 Kč podle složitosti datového modelu a workflow.
+
+### Pro koho je firemní školení AI?
+
+Pro zaměstnance, kteří chtějí AI používat v běžné práci — bez nutnosti technického zázemí. Nabízíme tříhodinový AI Start, celodenní AI Prakticky na vašich pracovních situacích a Automation Workshop pro mapování procesů.
+
+### Mám jen nápad, ne hotové zadání. Je to problém?
+
+Není. Popište situaci vlastními slovy v poptávkovém formuláři nebo zavolejte. Odpovím, zda je to vhodné zadání pro Asterion, a navrhnu další krok.
+
+## Kontakt
+
+- Poptávka: formulář na [asterionsoft.cz/#poptavka](https://asterionsoft.cz/#poptavka)
+- Telefon: +420 604 257 866
+- Sídlo: Bělehradská 858/23, 120 00 Praha 2
+- IČ: 10736697, DIČ: CZ10736697

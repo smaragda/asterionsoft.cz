@@ -1,4 +1,6 @@
+# Vyhledávače i AI asistenti (ChatGPT, Claude, Perplexity, Gemini…) mají přístup ke všemu.
+# Pro firemní prezentaci chceme být co nejvíc citovaní, proto neblokujeme ani trénovací crawlery.
 User-agent: *
 Allow: /
 
-Sitemap: https://www.asterionsoft.cz/sitemap.xml
+Sitemap: https://asterionsoft.cz/sitemap.xml
